@@ -34,16 +34,16 @@ app.get('/autenticar', async function(req, res){
 
 app.get('/listar', async function (req,res){
   const usuarios = await usuario.findAll();
-  res.render("usuarios");
+  res.render("listar", {usuarios})
 })
 
 app.get('/cadastro', async function (req,res){
-  res.render("autenticar");
+  res.render("cadastro");
 })
 
 app.post('/cadastro', async function (req,res){
   const usuario_ = await usuario.create(req.body)
-  res.json(usuario)
+  res.json(usuario_)
 })
 
 app.get('/', async function(req, res){
