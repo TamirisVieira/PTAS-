@@ -34,11 +34,11 @@ app.get('/autenticar', async function(req, res){
 
 app.get('/listar', async function (req,res){
   const usuarios = await usuario.findAll();
-  res.render("listar", {usuarios})
+  res.json(usuarios);
 })
 
 app.get('/cadastro', async function (req,res){
-  res.render("cadastro");
+  res.render("cadastro")
 })
 
 app.post('/cadastro', async function (req,res){
@@ -55,8 +55,9 @@ app.get('/sobre', function(req, res) {
   res.json({sobre: true})
 })
 
-app.post('/logar', (req, res) => {
-  if(req.body.user === 'tamiris' && req.body.password === '123'){
+app.post('/logar', async (req, res) => {
+  const banco = await usuario.FindOne({where: {usuario:req.body.user}})
+  if(req.body.user === banco.usuario && req.body.password === banco.senha){
     const id = 1;
     const token = jwt.sign({ id }, process.env.SECRET, {
       expiresIn: 3600 // expires in 1 hour 

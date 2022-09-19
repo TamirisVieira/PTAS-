@@ -12,7 +12,8 @@ module.exports = {
         type: Sequelize.STRING
       },
       usuario: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        unique:true
       },
       senha: {
         allowNull: false,
