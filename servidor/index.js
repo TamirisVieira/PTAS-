@@ -56,8 +56,8 @@ app.get('/sobre', function(req, res) {
 })
 
 app.post('/logar', async (req, res) => {
-  const banco = await usuario.FindOne({where: {usuario:req.body.user}})
-  if(req.body.user === banco.usuario && req.body.password === banco.senha){
+  const banco = await usuario.findOne({where: {usuario: req.body.user}})
+  if(req.body.user === banco.usuario && req.body.senha === banco.password){
     const id = 1;
     const token = jwt.sign({ id }, process.env.SECRET, {
       expiresIn: 3600 // expires in 1 hour 
